@@ -32,7 +32,7 @@ def on_chat_message(msg):
     if (content_type == 'text'):
         resp = get_definition(msg['text'])
         definition = resp['list'][0]
-        bot.sendMessage(chat_id, u'{}: {}\r\r{}'.format(definition['word'], definition['definition'], definition['example']))
+        bot.sendMessage(chat_id, u'{}: {}\n\nUsage:\n\n{}'.format(definition['word'], definition['definition'], definition['example']))
 
 def on_callback_query(msg):
     query_id, from_id, data = telepot.glance(msg, flavor='callback_query')
@@ -50,7 +50,7 @@ def on_inline_query(msg):
         articles.append({'type': 'article',
                          'id': str(definition['defid']),
                          'title': definition['definition'],
-                         'message_text': u'{}: {}\r\r{}'.format(definition['word'], definition['definition'], definition['example'])
+                         'message_text': u'{}: {}\n\nUsage:\n\n{}'.format(definition['word'], definition['definition'], definition['example'])
                         })
 
     bot.answerInlineQuery(query_id, articles)
