@@ -50,7 +50,8 @@ def on_inline_query(msg):
         articles.append({'type': 'article',
                          'id': str(definition['defid']),
                          'title': definition['definition'],
-                         'message_text': '{}: {}'.format(definition['word'], definition['definition'])})
+                         'message_text': definition['word'] + ': ' + definition['definition'])
+                        })
 
     bot.answerInlineQuery(query_id, articles)
 
