@@ -48,7 +48,7 @@ def on_inline_query(msg):
     articles = []
     for definition in definitions['list']:
         articles.append({'type': 'article',
-                         'id': string(definition['defid']),
+                         'id': str(definition['defid']),
                          'title': definition['definition'],
                          'message_text': definition['definition']})
 
