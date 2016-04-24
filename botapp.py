@@ -24,15 +24,14 @@ def get_definition(term):
     }
     result = urlfetch.fetch(url=url, headers=udheaders)
 
-    data = json.loads(result.content)
-    return data['list'][0]['definition']
+    return json.loads(result.content)
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id, msg_date, msg_id = telepot.glance(msg, long=True)
     logging.info(msg)
     if (content_type == 'text'):
         resp = get_definition(msg['text'])
-        bot.sendMessage(chat_id, resp)
+        bot.sendMessage(chat_id, resp['list'][0]['definition'])
     print 'Chat Message:', content_type, chat_type, chat_id
 
 def on_callback_query(msg):
@@ -43,10 +42,15 @@ def on_callback_query(msg):
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', query_id, from_id, query_string
+    definitions = get_definition(msg['text'])
 
     # Compose your own answers
-    articles = [{'type': 'article',
-                    'id': 'abc', 'title': 'ABC', 'message_text': 'Good morning'}]
+    articles = []
+    for definition in definitions['list']:
+        articles.append({'type': 'article',
+                         'id': definition['defid'],
+                         'title': definition['definition'],
+                         'message_text': definition['definition']})
 
     bot.answerInlineQuery(query_id, articles)
 
