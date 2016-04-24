@@ -31,8 +31,11 @@ def on_chat_message(msg):
     logging.info(msg)
     if (content_type == 'text'):
         resp = get_definition(msg['text'])
-        definition = resp['list'][0]
-        bot.sendMessage(chat_id, u'{}: {}{usage}'.format(definition['word'], definition['definition'], usage = "\r\n \r\nUsage: \r\n \r\n{}".format(definition['example']) if definition['example'] != '' else ""))
+        if (resp['result_type'] != 'no_results'):
+            definition = resp['list'][0]
+            bot.sendMessage(chat_id, u'{}: {}{usage}'.format(definition['word'], definition['definition'], usage = "\r\n \r\nUsage: \r\n \r\n{}".format(definition['example']) if definition['example'] != '' else ""))
+        else:
+            bot.sendMessage(chat_id, u'No one says that')
 
 def on_callback_query(msg):
     query_id, from_id, data = telepot.glance(msg, flavor='callback_query')
