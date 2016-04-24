@@ -32,7 +32,8 @@ def on_chat_message(msg):
     content_type, chat_type, chat_id, msg_date, msg_id = telepot.glance(msg, long=True)
     logging.info(msg)
     if (content_type == 'text'):
-        bot.sendMessage(chat_id = chat_id, reply_to_message_id = msg_id, text = get_definition(msg['text']))
+        resp = get_definition(msg['text'])
+        bot.sendMessage(chat_id, resp)
     print 'Chat Message:', content_type, chat_type, chat_id
 
 def on_callback_query(msg):
@@ -71,6 +72,7 @@ bot.message_loop({'chat': on_chat_message,
 
 @app.route('/%s' % TOKEN, methods=['GET', 'POST'])
 def pass_update():
+    logging.info("hey there")
     update_queue.put(request.data)  # pass update to bot
     return 'OK %s' % bot.getMe()
 
