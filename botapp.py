@@ -22,9 +22,7 @@ def get_definition(term):
         "X-Mashape-Key": UD_TOKEN,
         "Accept": "text/plain"
     }
-    result = urlfetch.fetch(url=url,
-                            method=urlfetch.GET,
-                            headers=udheaders)
+    result = urlfetch.fetch(url=url, headers=udheaders)
 
     data = json.loads(result.content)
     return data['list'][0]['definition']
