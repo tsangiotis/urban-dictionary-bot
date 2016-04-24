@@ -31,7 +31,8 @@ def on_chat_message(msg):
     logging.info(msg)
     if (content_type == 'text'):
         resp = get_definition(msg['text'])
-        bot.sendMessage(chat_id, resp['list'][0]['definition'])
+        definition = resp['list'][0]
+        bot.sendMessage(chat_id, u'{}: {}\r\r{}'.format(definition['word'], definition['definition'], definition['example'])
     print 'Chat Message:', content_type, chat_type, chat_id
 
 def on_callback_query(msg):
