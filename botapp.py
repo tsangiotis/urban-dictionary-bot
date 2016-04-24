@@ -54,7 +54,7 @@ def on_chosen_inline_result(msg):
 TOKEN = '200808779:AAFd5_hX2wxdTfuOCAzsSYQTY0BhKbT8LR4'
 UD_TOKEN = '8JL3NIJz9FmshRaXK5l8xa044FaEp1CDZtzjsnJ2Oqc10FJ83g'
 PORT = 443
-URL = 'https://urbandictionarybot-tsangiotis.rhcloud.com/%s' % TOKEN
+URL = 'https://urbandictionarybot-tsangiotis.rhcloud.com'
 
 app = Flask(__name__)
 bot = telepot.Bot(TOKEN)
@@ -65,7 +65,7 @@ bot.message_loop({'chat': on_chat_message,
                   'inline_query': on_inline_query,
                   'chosen_inline_result': on_chosen_inline_result}, source=update_queue)  # take updates from queue
 
-@app.route('/abc', methods=['GET', 'POST'])
+@app.route('/%s' % TOKEN, methods=['GET', 'POST'])
 def pass_update():
     update_queue.put(request.data)  # pass update to bot
     return 'OK'
