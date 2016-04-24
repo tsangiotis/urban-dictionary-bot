@@ -70,7 +70,7 @@ bot.message_loop({'chat': on_chat_message,
 @app.route('/%s' % TOKEN, methods=['GET', 'POST'])
 def pass_update():
     update_queue.put(request.data)  # pass update to bot
-    return 'OK %s' % URL
+    return 'OK %s' % bot.getMe()
 
 if __name__ == '__main__':
     bot.setWebhook(URL)
