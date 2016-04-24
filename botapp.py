@@ -42,7 +42,7 @@ def on_callback_query(msg):
 def on_inline_query(msg):
     query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
     print 'Inline Query:', query_id, from_id, query_string
-    definitions = get_definition(msg['text'])
+    definitions = get_definition(query_string)
 
     # Compose your own answers
     articles = []
