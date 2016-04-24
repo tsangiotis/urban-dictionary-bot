@@ -56,7 +56,6 @@ def on_chosen_inline_result(msg):
 
 TOKEN = '200808779:AAFd5_hX2wxdTfuOCAzsSYQTY0BhKbT8LR4'
 UD_TOKEN = '8JL3NIJz9FmshRaXK5l8xa044FaEp1CDZtzjsnJ2Oqc10FJ83g'
-PORT = 443
 URL = 'https://urbandictionarybot-tsangiotis.rhcloud.com/%s' % TOKEN
 
 app = Flask(__name__)
@@ -75,4 +74,4 @@ def pass_update():
 
 if __name__ == '__main__':
     bot.setWebhook(URL)
-    app.run(port=PORT, debug=True)
+    app.run(debug=True)
