@@ -2,6 +2,7 @@ import sys
 import json
 from flask import Flask, request
 import telepot
+import logging
 
 try:
     from Queue import Queue
@@ -29,8 +30,9 @@ def get_definition(term):
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id, msg_date, msg_id = telepot.glance(msg, long=True)
+    logging.info(msg)
     if (content_type == 'text'):
-        telepot.sendMessage(chat_id = chat_id, reply_to_message_id = msg_id, text = get_definition(msg['text']))
+        bot.sendMessage(chat_id = chat_id, reply_to_message_id = msg_id, text = get_definition(msg['text']))
     print 'Chat Message:', content_type, chat_type, chat_id
 
 def on_callback_query(msg):
