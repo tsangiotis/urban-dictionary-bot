@@ -16,7 +16,7 @@ Webhook path is '/abc' (see below), therefore:
 """
 
 def get_definition(term):
-    url = 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + text
+    url = 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + term
     udheaders = {
         "X-Mashape-Key": UD_TOKEN,
         "Accept": "text/plain"
