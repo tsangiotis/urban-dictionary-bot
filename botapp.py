@@ -35,7 +35,7 @@ def on_chat_message(msg):
             definition = resp['list'][0]
             bot.sendMessage(chat_id, u'{}: {}{usage}'.format(definition['word'], definition['definition'], usage = "\r\n \r\nUsage: \r\n \r\n{}".format(definition['example']) if definition['example'] != '' else ""))
         else:
-            bot.sendMessage(chat_id, u'No one says that')
+            bot.sendMessage(chat_id, u'Who talks like that?')
 
 def on_callback_query(msg):
     query_id, from_id, data = telepot.glance(msg, flavor='callback_query')
@@ -64,8 +64,8 @@ def on_chosen_inline_result(msg):
     print 'Chosen Inline Result:', result_id, from_id, query_string
 
 
-TOKEN = "200808779:AAFd5_hX2wxdTfuOCAzsSYQTY0BhKbT8LR4"
-UD_TOKEN = "8JL3NIJz9FmshRaXK5l8xa044FaEp1CDZtzjsnJ2Oqc10FJ83g"
+TOKEN = ""
+UD_TOKEN = ""
 URL = 'https://urbandictionarybot-tsangiotis.rhcloud.com/%s' % TOKEN
 
 app = Flask(__name__)
